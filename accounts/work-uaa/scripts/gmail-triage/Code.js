@@ -23,9 +23,11 @@ const CONFIG = (() => {
     
     // Processing Parameters
     PAGE_SIZE: 50,
-    MAX_PER_RUN: 200,
+    MAX_PER_RUN: parseInt(props.TRIAGE_MAX_PER_RUN || '50'), // Start conservative
     PAUSE_MS: 100,
     CACHE_DURATION_SECONDS: 6 * 60 * 60, // 6 hours
+    DRY_RUN: props.TRIAGE_DRY_RUN === 'true', // Safety mode
+    PREVIEW_MODE: props.TRIAGE_PREVIEW_MODE === 'true'
     
     // Label Prefixes
     RUN_LABEL_PREFIX: '_Triage/Run-',
@@ -402,42 +404,75 @@ function processInbox() {
       try {
         const result = classifier.classifyThread(thread);
         
-        // Apply classification
-        switch (result.action) {
-          case 'star':
-            thread.addLabel(GmailApp.createLabel('VIP'));
-            thread.markImportant();
-            if (!thread.isStarred()) {
-              GmailApp.starMessage(thread.getMessages()[0]);
-            }
-            starred++;
-            Logger.log(`⭐ Starred VIP: ${thread.getFirstMessageSubject()}`);
-            break;
-            
-          case 'label':
-            if (result.label) {
-              const label = GmailApp.createLabel(result.label);
-              thread.addLabel(label);
-              labeled++;
+        // Apply classification based on mode
+        if (CONFIG.DRY_RUN) {
+          // DRY RUN - Log only
+          Logger.log(`[DRY RUN] Would ${result.action}: ${thread.getFirstMessageSubject()}`);
+          if (result.label) {
+            Logger.log(`[DRY RUN] Would label as: ${result.label}`);
+          }
+          processed++;
+          
+        } else if (CONFIG.PREVIEW_MODE) {
+          // PREVIEW MODE - Add preview labels only
+          const previewLabel = GmailApp.createLabel(`_Triage/PREVIEW-${result.action}`);
+          thread.addLabel(previewLabel);
+          
+          if (result.label) {
+            const labelPreview = GmailApp.createLabel(`_Triage/PREVIEW-${result.label}`);
+            thread.addLabel(labelPreview);
+          }
+          
+          Logger.log(`[PREVIEW] Marked for ${result.action}: ${thread.getFirstMessageSubject()}`);
+          processed++;
+          
+        } else {
+          // PRODUCTION MODE - Apply actual changes
+          switch (result.action) {
+            case 'star':
+              thread.addLabel(GmailApp.createLabel('VIP'));
+              thread.markImportant();
+              if (!thread.isStarred()) {
+                GmailApp.starMessage(thread.getMessages()[0]);
+              }
+              starred++;
+              Logger.log(`⭐ Starred VIP: ${thread.getFirstMessageSubject()}`);
+              break;
               
-              // Archive if high confidence
-              if (result.confidence >= CONFIG.HIGH_CONFIDENCE) {
+            case 'label':
+              if (result.label) {
+                const label = GmailApp.createLabel(result.label);
+                thread.addLabel(label);
+                labeled++;
+                
+                // Archive only with high confidence and not from .edu domains
+                const sender = classifier._extractSenderEmail(thread.getMessages()[0].getFrom());
+                const isEduDomain = sender.endsWith('.edu');
+                
+                if (result.confidence >= CONFIG.HIGH_CONFIDENCE && !isEduDomain) {
+                  thread.moveToArchive();
+                  archived++;
+                }
+                Logger.log(`🏷️ Labeled as ${result.label}: ${thread.getFirstMessageSubject()}`);
+              }
+              break;
+              
+            case 'archive':
+              // Extra safety check for work email
+              const archiveSender = classifier._extractSenderEmail(thread.getMessages()[0].getFrom());
+              if (!archiveSender.endsWith('.edu')) {
                 thread.moveToArchive();
                 archived++;
+                Logger.log(`📦 Archived: ${thread.getFirstMessageSubject()}`);
+              } else {
+                Logger.log(`📥 Kept (edu domain): ${thread.getFirstMessageSubject()}`);
               }
-              Logger.log(`🏷️ Labeled as ${result.label}: ${thread.getFirstMessageSubject()}`);
-            }
-            break;
-            
-          case 'archive':
-            thread.moveToArchive();
-            archived++;
-            Logger.log(`📦 Archived: ${thread.getFirstMessageSubject()}`);
-            break;
-            
-          default:
-            // Keep in inbox
-            Logger.log(`📥 Kept: ${thread.getFirstMessageSubject()}`);
+              break;
+              
+            default:
+              // Keep in inbox
+              Logger.log(`📥 Kept: ${thread.getFirstMessageSubject()}`);
+          }
         }
         
         // Mark as processed
