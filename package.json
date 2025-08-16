@@ -2,11 +2,21 @@
   "name": "gmail-appscript",
   "version": "1.0.0",
   "description": "Gmail AppScript management repository",
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=10.14.0"
+  },
   "scripts": {
     "push": "clasp push",
     "pull": "clasp pull",
     "deploy": "clasp deploy",
-    "logs": "clasp logs"
+    "logs": "clasp logs",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "validate": "node scripts/validate-configs.js",
+    "check:pnpm": "node scripts/check-pnpm.js",
+    "preinstall": "npx only-allow pnpm"
   },
   "repository": {
     "type": "git",
@@ -21,6 +31,11 @@
   "license": "MIT",
   "devDependencies": {
     "@google/clasp": "^2.4.2",
-    "@types/google-apps-script": "^1.0.83"
+    "@types/google-apps-script": "^1.0.83",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.5",
+    "jest": "^29.7.0",
+    "only-allow": "^1.2.1",
+    "typescript": "^5.3.3"
   }
 }

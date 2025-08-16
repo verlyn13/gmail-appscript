@@ -50,8 +50,17 @@ Each account maintains its own:
 
 ### Prerequisites
 ```bash
-npm install -g @google/clasp
-npm install
+# Install pnpm (version 10.14.0 or higher required)
+npm install -g pnpm@latest
+
+# Verify pnpm version
+pnpm --version  # Should be >= 10.14.0
+
+# Install clasp globally with pnpm
+pnpm add -g @google/clasp
+
+# Install project dependencies
+pnpm install
 ```
 
 ### Setup Account
@@ -136,13 +145,16 @@ function manageClients() {
 ### Local Testing
 ```bash
 # Run unit tests
-npm test
+pnpm test
 
 # Test specific account
-npm test -- --account=personal-jeffrey
+pnpm test -- --account=personal-jeffrey
 
 # Validate configurations
-npm run validate
+pnpm run validate
+
+# Check pnpm version requirement
+pnpm run check:pnpm
 ```
 
 ### Environment Variables

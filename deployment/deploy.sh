@@ -57,7 +57,7 @@ clasp pull
 # Run tests if they exist
 if [ -f "test.js" ]; then
     echo "Running tests..."
-    npm test || { echo "Tests failed!"; exit 1; }
+    pnpm test || { echo "Tests failed!"; exit 1; }
 fi
 
 # Push to Apps Script
