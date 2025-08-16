@@ -22,26 +22,72 @@
       "destination": "audit-logs"
     }
   },
-  "scripts": [
-    {
-      "name": "student-inquiries",
-      "description": "Route and tag student emails",
-      "schedule": "every30minutes",
-      "enabled": true
-    },
-    {
-      "name": "meeting-scheduler",
-      "description": "Process meeting requests and calendar invites",
-      "schedule": "every15minutes",
-      "enabled": true
-    },
-    {
-      "name": "compliance-tagger",
-      "description": "Tag emails for retention and compliance",
-      "schedule": "daily",
-      "enabled": true
-    }
-  ],
+  "gcloud": {
+    "configuration": "alaska-edu",
+    "project": "gmail-organizer-469202",
+    "availableProjects": [
+      "fluent-horizon-281415",
+      "gmail-organizer-469202",
+      "rosy-clover-281419"
+    ]
+  },
+  "appsScripts": {
+    "existing": [
+      {
+        "name": "Gmail Triage",
+        "id": "1nLhSsknNMLMG7z5-oEOGMdEEZxFmWWflMknW2lq2QXvMDVswg7DupDgT",
+        "url": "https://script.google.com/d/1nLhSsknNMLMG7z5-oEOGMdEEZxFmWWflMknW2lq2QXvMDVswg7DupDgT/edit",
+        "purpose": "Email organization and triage automation",
+        "status": "active"
+      },
+      {
+        "name": "Collector",
+        "id": "1gBLPOg9NYgSzJtz_10Svh_TGOrjdeZTuIhqK1K5pC_mHb2n5D5Reohh7",
+        "url": "https://script.google.com/d/1gBLPOg9NYgSzJtz_10Svh_TGOrjdeZTuIhqK1K5pC_mHb2n5D5Reohh7/edit",
+        "purpose": "Data collection and aggregation from emails",
+        "status": "active"
+      },
+      {
+        "name": "Email Automate",
+        "id": "1kgVKABkexh8LmWsJuklNwSpi8rP_LwKIbXxKVXA0oMKDh3KPYiw_w22d",
+        "url": "https://script.google.com/d/1kgVKABkexh8LmWsJuklNwSpi8rP_LwKIbXxKVXA0oMKDh3KPYiw_w22d/edit",
+        "purpose": "Automated email workflows and responses",
+        "status": "active"
+      },
+      {
+        "name": "Directory List",
+        "id": "1g2JiuQG6X7ei8CMDccthOxYL59QgIVFc1XubKPnyPF2f77Fui34CwvWM",
+        "url": "https://script.google.com/d/1g2JiuQG6X7ei8CMDccthOxYL59QgIVFc1XubKPnyPF2f77Fui34CwvWM/edit",
+        "purpose": "University directory and contact management",
+        "status": "active"
+      }
+    ],
+    "planned": [
+      {
+        "name": "student-inquiries",
+        "description": "Route and tag student emails",
+        "schedule": "every30minutes",
+        "enabled": false
+      },
+      {
+        "name": "meeting-scheduler",
+        "description": "Process meeting requests and calendar invites",
+        "schedule": "every15minutes",
+        "enabled": false
+      },
+      {
+        "name": "compliance-tagger",
+        "description": "Tag emails for retention and compliance",
+        "schedule": "daily",
+        "enabled": false
+      }
+    ]
+  },
+  "clasp": {
+    "credentials": "~/.clasprc-alaska.json",
+    "usage": "Run 'gcloud-switch alaska-edu' before using clasp commands"
+  },
+  "scripts": [],
   "labels": {
     "structure": {
       "Students": ["current", "prospective", "alumni"],

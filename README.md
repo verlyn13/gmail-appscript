@@ -1,6 +1,6 @@
 # Gmail AppScript Management
 
-Expert-level repository for managing Gmail automation across multiple accounts with proper separation of concerns, shared libraries, and deployment infrastructure.
+Centralized repository for Gmail automation across multiple accounts. **4 active scripts in production for UAA account.**
 
 ## 📋 Repository Structure
 
@@ -47,6 +47,18 @@ Each account maintains its own:
 - **Personal Accounts**: Full automation capabilities
 
 ## 🚀 Quick Start
+
+### Active UAA Scripts
+```bash
+# Switch to UAA account
+gcloud-switch alaska-edu
+
+# Clone existing scripts
+clasp clone 1nLhSsknNMLMG7z5-oEOGMdEEZxFmWWflMknW2lq2QXvMDVswg7DupDgT  # Gmail Triage
+clasp clone 1gBLPOg9NYgSzJtz_10Svh_TGOrjdeZTuIhqK1K5pC_mHb2n5D5Reohh7  # Collector
+clasp clone 1kgVKABkexh8LmWsJuklNwSpi8rP_LwKIbXxKVXA0oMKDh3KPYiw_w22d  # Email Automate
+clasp clone 1g2JiuQG6X7ei8CMDccthOxYL59QgIVFc1XubKPnyPF2f77Fui34CwvWM  # Directory List
+```
 
 ### Prerequisites
 ```bash
@@ -95,11 +107,15 @@ clasp create --title "My Script" --type standalone
 - **Features**: Full automation, inbox zero, newsletter management
 - **Scripts**: inbox-zero, newsletter-organizer, attachment-backup
 
-### Work - UAA
+### Work - UAA (4 Active Scripts)
 - **Email**: jjohnson47@alaska.edu
 - **Organization**: University of Alaska Anchorage
 - **Compliance**: 7-year retention, audit logging
-- **Scripts**: student-inquiries, meeting-scheduler, compliance-tagger
+- **Active Scripts**: 
+  - Gmail Triage (email organization)
+  - Collector (data aggregation)
+  - Email Automate (workflow automation)
+  - Directory List (contact management)
 
 ### Business - Happy Patterns
 - **Email**: jeffrey@happy-patterns.com
@@ -241,8 +257,13 @@ Each script includes:
 
 MIT - See LICENSE file
 
+## 📚 Key Documentation
+
+- [Quick Reference](./docs/QUICK_REFERENCE.md) - Common commands and script IDs
+- [Project Overview](./docs/PROJECT_OVERVIEW.md) - Repository status and structure
+- [UAA Scripts](./accounts/work-uaa/README.md) - UAA account documentation
+
 ## 🆘 Support
 
-- **Documentation**: See `/docs` directory
 - **Issues**: GitHub Issues
 - **Contact**: jeffreyverlynjohnson@gmail.com
