@@ -1,0 +1,26 @@
+{
+  "name": "gmail-appscript",
+  "version": "1.0.0",
+  "description": "Gmail AppScript management repository",
+  "scripts": {
+    "push": "clasp push",
+    "pull": "clasp pull",
+    "deploy": "clasp deploy",
+    "logs": "clasp logs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verlyn13/gmail-appscript.git"
+  },
+  "keywords": [
+    "gmail",
+    "google-apps-script",
+    "automation"
+  ],
+  "author": "verlyn13",
+  "license": "MIT",
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "@types/google-apps-script": "^1.0.83"
+  }
+}
