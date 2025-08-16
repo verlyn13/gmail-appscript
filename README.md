@@ -143,12 +143,21 @@ function manageClients() {
 ## 🔧 Development
 
 ### Local Testing
+
+Using Vitest for fast, modern testing:
+
 ```bash
-# Run unit tests
+# Run all tests
 pnpm test
 
-# Test specific account
-pnpm test -- --account=personal-jeffrey
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with UI dashboard
+pnpm test:ui
+
+# Run tests with coverage report
+pnpm test:coverage
 
 # Validate configurations
 pnpm run validate
@@ -156,6 +165,11 @@ pnpm run validate
 # Check pnpm version requirement
 pnpm run check:pnpm
 ```
+
+Tests are located in:
+- `/tests/unit/` - Unit tests for shared libraries
+- `/tests/integration/` - Integration tests
+- Account-specific tests in each account's scripts folder
 
 ### Environment Variables
 ```bash

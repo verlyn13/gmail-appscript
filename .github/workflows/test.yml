@@ -47,11 +47,17 @@ jobs:
     - name: Check pnpm version
       run: pnpm run check:pnpm || true
     
-    - name: Run shared library tests
-      run: |
-        if [ -d "tests/unit" ]; then
-          pnpm test -- tests/unit
-        fi
+    - name: Run tests with coverage
+      run: pnpm test:coverage
+    
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      if: matrix.account == 'personal-jeffrey'
+      with:
+        files: ./coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
     
     - name: Validate account configuration
       run: |

@@ -12,8 +12,10 @@
     "pull": "clasp pull",
     "deploy": "clasp deploy",
     "logs": "clasp logs",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
     "validate": "node scripts/validate-configs.js",
     "check:pnpm": "node scripts/check-pnpm.js",
     "preinstall": "npx only-allow pnpm"
@@ -32,10 +34,12 @@
   "devDependencies": {
     "@google/clasp": "^3.0.6-alpha",
     "@types/google-apps-script": "^1.0.99",
-    "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
-    "jest": "^30.0.5",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "happy-dom": "^18.0.1",
     "only-allow": "^1.2.1",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }
