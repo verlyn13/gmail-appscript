@@ -1,0 +1,102 @@
+{
+  "accounts": {
+    "personal-jeffrey": {
+      "email": "jeffreyverlynjohnson@gmail.com",
+      "name": "Jeffrey Personal",
+      "type": "personal",
+      "provider": "gmail",
+      "features": {
+        "filters": true,
+        "labels": true,
+        "automation": true,
+        "cleanup": true
+      },
+      "quotas": {
+        "dailyQuota": 20000,
+        "rateLimitPerMinute": 250
+      }
+    },
+    "work-uaa": {
+      "email": "jjohnson47@alaska.edu",
+      "name": "UAA Work",
+      "type": "work",
+      "provider": "google-workspace",
+      "organization": "University of Alaska Anchorage",
+      "features": {
+        "filters": true,
+        "labels": true,
+        "automation": true,
+        "cleanup": false,
+        "compliance": true
+      },
+      "restrictions": {
+        "requireApproval": true,
+        "allowedDomains": ["alaska.edu", "ua.edu"],
+        "retentionPolicy": "7years"
+      },
+      "quotas": {
+        "dailyQuota": 20000,
+        "rateLimitPerMinute": 250
+      }
+    },
+    "business-happy-patterns": {
+      "email": "jeffrey@happy-patterns.com",
+      "name": "Happy Patterns Business",
+      "type": "business",
+      "provider": "google-workspace",
+      "organization": "Happy Patterns LLC",
+      "features": {
+        "filters": true,
+        "labels": true,
+        "automation": true,
+        "cleanup": true,
+        "crm": true,
+        "invoicing": true
+      },
+      "integrations": {
+        "crm": "hubspot",
+        "accounting": "quickbooks"
+      },
+      "quotas": {
+        "dailyQuota": 20000,
+        "rateLimitPerMinute": 250
+      }
+    },
+    "personal-ahniel": {
+      "email": "ahnielitecky@gmail.com",
+      "name": "Ahniel Personal",
+      "type": "family",
+      "provider": "gmail",
+      "relationship": "spouse",
+      "features": {
+        "filters": true,
+        "labels": true,
+        "automation": true,
+        "cleanup": true
+      },
+      "permissions": {
+        "requireConsent": true,
+        "allowedOperations": ["read", "label", "archive"],
+        "restrictedOperations": ["delete", "modify", "forward"]
+      },
+      "quotas": {
+        "dailyQuota": 20000,
+        "rateLimitPerMinute": 250
+      }
+    }
+  },
+  "sharedSettings": {
+    "timezone": "America/Anchorage",
+    "language": "en",
+    "errorHandling": {
+      "retryAttempts": 3,
+      "retryDelay": 1000,
+      "notifyOnError": true
+    },
+    "logging": {
+      "level": "INFO",
+      "destination": "console",
+      "retentionDays": 30
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "account": {
+    "email": "jeffreyverlynjohnson@gmail.com",
+    "displayName": "Jeffrey's Personal Gmail",
+    "type": "personal",
+    "created": "2025-01-16"
+  },
+  "scripts": [
+    {
+      "name": "inbox-zero",
+      "description": "Automated inbox management and cleanup",
+      "schedule": "daily",
+      "enabled": true
+    },
+    {
+      "name": "newsletter-organizer",
+      "description": "Categorize and archive newsletters",
+      "schedule": "hourly",
+      "enabled": true
+    },
+    {
+      "name": "attachment-backup",
+      "description": "Backup important attachments to Drive",
+      "schedule": "weekly",
+      "enabled": false
+    }
+  ],
+  "labels": {
+    "structure": {
+      "Projects": ["personal", "learning", "opensource"],
+      "Finance": ["bills", "receipts", "taxes"],
+      "Archive": ["2023", "2024", "2025"]
+    }
+  },
+  "filters": {
+    "autoArchive": {
+      "enabled": true,
+      "olderThan": 30,
+      "excludeLabels": ["Important", "Action Required"]
+    },
+    "autoLabel": {
+      "enabled": true,
+      "rules": [
+        {
+          "from": "*@github.com",
+          "label": "GitHub"
+        },
+        {
+          "from": "*@linkedin.com",
+          "label": "LinkedIn"
+        }
+      ]
+    }
+  },
+  "preferences": {
+    "notifications": {
+      "dailySummary": true,
+      "errorAlerts": true
+    },
+    "cleanup": {
+      "deleteSpam": true,
+      "emptyTrash": true,
+      "frequency": "weekly"
+    }
+  }
+}

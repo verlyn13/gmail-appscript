@@ -1,0 +1,50 @@
+name: Test Scripts
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        account: [personal-jeffrey, work-uaa, business-happy-patterns, personal-ahniel]
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run shared library tests
+      run: |
+        if [ -d "tests/unit" ]; then
+          npm test -- tests/unit
+        fi
+    
+    - name: Validate account configuration
+      run: |
+        node -e "
+        const fs = require('fs');
+        const config = JSON.parse(fs.readFileSync('accounts/${{ matrix.account }}/account.json'));
+        console.log('Valid config for:', config.account.email);
+        "
+    
+    - name: Check script syntax
+      run: |
+        for script in accounts/${{ matrix.account }}/scripts/*/; do
+          if [ -d "$script" ]; then
+            echo "Checking: $script"
+            find "$script" -name "*.js" -o -name "*.gs" | xargs -I {} node -c {}
+          fi
+        done

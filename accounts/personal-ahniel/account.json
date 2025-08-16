@@ -1,0 +1,86 @@
+{
+  "account": {
+    "email": "ahnielitecky@gmail.com",
+    "displayName": "Ahniel's Personal Gmail",
+    "type": "family",
+    "relationship": "spouse",
+    "created": "2025-01-16"
+  },
+  "permissions": {
+    "managedBy": "jeffreyverlynjohnson@gmail.com",
+    "requireConsent": true,
+    "allowedOperations": [
+      "read",
+      "label",
+      "archive",
+      "organize"
+    ],
+    "restrictedOperations": [
+      "delete",
+      "modify",
+      "forward",
+      "send"
+    ],
+    "auditLog": true
+  },
+  "scripts": [
+    {
+      "name": "family-organizer",
+      "description": "Organize family and personal emails",
+      "schedule": "daily",
+      "enabled": true
+    },
+    {
+      "name": "subscription-manager",
+      "description": "Manage and organize subscriptions",
+      "schedule": "weekly",
+      "enabled": true
+    },
+    {
+      "name": "photo-backup",
+      "description": "Backup photo attachments to shared Drive",
+      "schedule": "daily",
+      "enabled": false
+    }
+  ],
+  "labels": {
+    "structure": {
+      "Family": ["immediate", "extended", "events"],
+      "Shopping": ["orders", "tracking", "receipts"],
+      "Health": ["appointments", "records", "reminders"],
+      "Hobbies": ["crafts", "reading", "travel"]
+    }
+  },
+  "filters": {
+    "familyPriority": {
+      "high": ["family", "medical", "school"],
+      "medium": ["friends", "social"],
+      "low": ["promotions", "newsletters"]
+    },
+    "autoArchive": {
+      "enabled": true,
+      "categories": {
+        "promotions": 7,
+        "social": 30,
+        "updates": 14
+      }
+    }
+  },
+  "privacy": {
+    "shareWithSpouse": true,
+    "sharedLabels": ["Family", "Finance", "Travel"],
+    "privateLabels": ["Personal", "Medical"]
+  },
+  "preferences": {
+    "notifications": {
+      "familyEmails": true,
+      "appointments": true,
+      "shopping": false
+    },
+    "cleanup": {
+      "enabled": true,
+      "frequency": "weekly",
+      "categories": ["promotions", "social", "forums"]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "development",
+  "debug": true,
+  "dryRun": true,
+  "logging": {
+    "level": "DEBUG",
+    "verbose": true
+  },
+  "limits": {
+    "maxThreadsPerRun": 10,
+    "maxExecutionTime": 300
+  },
+  "features": {
+    "enableExperimental": true,
+    "enableTesting": true,
+    "enableMocking": true
+  },
+  "notifications": {
+    "email": "jeffreyverlynjohnson@gmail.com",
+    "onError": true,
+    "onSuccess": false
+  }
+}

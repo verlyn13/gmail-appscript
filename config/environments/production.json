@@ -1,0 +1,28 @@
+{
+  "name": "production",
+  "debug": false,
+  "dryRun": false,
+  "logging": {
+    "level": "WARN",
+    "verbose": false
+  },
+  "limits": {
+    "maxThreadsPerRun": 500,
+    "maxExecutionTime": 360
+  },
+  "features": {
+    "enableExperimental": false,
+    "enableTesting": false,
+    "enableMocking": false
+  },
+  "notifications": {
+    "email": "jeffreyverlynjohnson@gmail.com",
+    "onError": true,
+    "onSuccess": false
+  },
+  "backup": {
+    "enabled": true,
+    "frequency": "daily",
+    "retention": 30
+  }
+}

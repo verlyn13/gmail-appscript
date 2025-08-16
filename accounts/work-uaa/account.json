@@ -1,0 +1,81 @@
+{
+  "account": {
+    "email": "jjohnson47@alaska.edu",
+    "displayName": "UAA Work Email",
+    "type": "work",
+    "organization": "University of Alaska Anchorage",
+    "department": "Computer Science",
+    "created": "2025-01-16"
+  },
+  "compliance": {
+    "retentionPolicy": {
+      "enabled": true,
+      "duration": "7years",
+      "exceptions": ["legal-hold", "confidential"]
+    },
+    "dataClassification": {
+      "enabled": true,
+      "levels": ["public", "internal", "confidential", "restricted"]
+    },
+    "auditLog": {
+      "enabled": true,
+      "destination": "audit-logs"
+    }
+  },
+  "scripts": [
+    {
+      "name": "student-inquiries",
+      "description": "Route and tag student emails",
+      "schedule": "every30minutes",
+      "enabled": true
+    },
+    {
+      "name": "meeting-scheduler",
+      "description": "Process meeting requests and calendar invites",
+      "schedule": "every15minutes",
+      "enabled": true
+    },
+    {
+      "name": "compliance-tagger",
+      "description": "Tag emails for retention and compliance",
+      "schedule": "daily",
+      "enabled": true
+    }
+  ],
+  "labels": {
+    "structure": {
+      "Students": ["current", "prospective", "alumni"],
+      "Courses": ["CS101", "CS201", "CS301"],
+      "Admin": ["department", "university", "committees"],
+      "Research": ["papers", "grants", "collaborations"]
+    }
+  },
+  "filters": {
+    "prioritization": {
+      "high": ["*@alaska.edu", "department-chair", "dean"],
+      "medium": ["students", "faculty"],
+      "low": ["newsletters", "announcements"]
+    }
+  },
+  "restrictions": {
+    "allowedDomains": ["alaska.edu", "ua.edu", "edu"],
+    "blockedDomains": [],
+    "forwardingRules": {
+      "requireApproval": true,
+      "allowedRecipients": ["*@alaska.edu"]
+    }
+  },
+  "preferences": {
+    "workingHours": {
+      "enabled": true,
+      "timezone": "America/Anchorage",
+      "schedule": {
+        "monday": "08:00-17:00",
+        "tuesday": "08:00-17:00",
+        "wednesday": "08:00-17:00",
+        "thursday": "08:00-17:00",
+        "friday": "08:00-17:00"
+      }
+    }
+  }
+}

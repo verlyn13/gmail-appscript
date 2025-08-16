@@ -1,0 +1,102 @@
+{
+  "account": {
+    "email": "jeffrey@happy-patterns.com",
+    "displayName": "Happy Patterns Business",
+    "type": "business",
+    "organization": "Happy Patterns LLC",
+    "role": "Owner/CEO",
+    "created": "2025-01-16"
+  },
+  "business": {
+    "domain": "happy-patterns.com",
+    "industry": "Software Development",
+    "services": ["consulting", "development", "training"]
+  },
+  "scripts": [
+    {
+      "name": "client-manager",
+      "description": "Manage client communications and follow-ups",
+      "schedule": "every15minutes",
+      "enabled": true
+    },
+    {
+      "name": "invoice-processor",
+      "description": "Process and organize invoice-related emails",
+      "schedule": "hourly",
+      "enabled": true
+    },
+    {
+      "name": "lead-capture",
+      "description": "Capture and tag potential leads",
+      "schedule": "every30minutes",
+      "enabled": true
+    },
+    {
+      "name": "crm-sync",
+      "description": "Sync email data with CRM system",
+      "schedule": "daily",
+      "enabled": false
+    }
+  ],
+  "integrations": {
+    "crm": {
+      "provider": "hubspot",
+      "syncEnabled": false,
+      "apiKeyLocation": "config/credentials/hubspot"
+    },
+    "accounting": {
+      "provider": "quickbooks",
+      "syncEnabled": false,
+      "apiKeyLocation": "config/credentials/quickbooks"
+    },
+    "calendar": {
+      "provider": "google-calendar",
+      "syncEnabled": true
+    }
+  },
+  "labels": {
+    "structure": {
+      "Clients": ["active", "potential", "past"],
+      "Projects": ["ongoing", "completed", "proposals"],
+      "Finance": ["invoices", "payments", "expenses"],
+      "Marketing": ["campaigns", "newsletters", "social"],
+      "Support": ["tickets", "questions", "feedback"]
+    }
+  },
+  "filters": {
+    "clientPriority": {
+      "vip": ["enterprise-clients", "retainer-clients"],
+      "standard": ["project-clients"],
+      "prospect": ["leads", "inquiries"]
+    },
+    "autoResponse": {
+      "enabled": true,
+      "templates": {
+        "inquiry": "templates/auto-reply-inquiry.html",
+        "support": "templates/auto-reply-support.html"
+      }
+    }
+  },
+  "templates": {
+    "proposals": "templates/proposal-template.html",
+    "invoices": "templates/invoice-template.html",
+    "followUp": "templates/follow-up-template.html"
+  },
+  "preferences": {
+    "businessHours": {
+      "timezone": "America/Anchorage",
+      "schedule": {
+        "monday": "09:00-18:00",
+        "tuesday": "09:00-18:00",
+        "wednesday": "09:00-18:00",
+        "thursday": "09:00-18:00",
+        "friday": "09:00-16:00"
+      }
+    },
+    "notifications": {
+      "vipEmails": true,
+      "newLeads": true,
+      "paymentReceived": true
+    }
+  }
+}
